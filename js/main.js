@@ -14,6 +14,19 @@ $(document).ready(function() {
     }
   });
 
+  $('a.aerostat-button').click(function() {
+    if ($('.panel-cover').hasClass('panel-cover--collapsed')) return;
+    currentHeight = $('.panel-cover').height();
+    if (currentHeight < 800) {
+      $('.panel-cover').addClass('panel-cover--collapsed');
+      $('.content-wrapper').addClass('animated slideOutUp');
+    } else {
+      $('.panel-cover').css('max-height',currentHeight);
+      $('.panel-cover').animate({'max-height': '550px', 'height': '40%'}, 400, swing = 'swing', function() {} );
+    }
+  });
+
+
   if (window.location.hash && window.location.hash == "#blog") {
     $('.panel-cover').addClass('panel-cover--collapsed');
   }
