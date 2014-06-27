@@ -1,0 +1,37 @@
+.pinit {
+	position:relative;
+	display:inline-block;
+
+}
+
+.pinit .pinit-overlay {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:200;
+	display:none;
+	background:transparent url('../images/semi-white.png') repeat 0 0;
+	text-align:center;
+}
+
+.pinit .pinit-overlay a {
+	position:relative;
+	top:50%;
+	left:50%;
+	margin:-10px 0 0 -21px;
+	display:block;
+	width:43px;
+	height:20px;
+	background:transparent url('../images/pinit-button.png') no-repeat 0 0;
+	text-indent:-9999em;
+}
+
+.pinit .pinit-overlay a:hover {
+	background-positon: 0 -21px;
+}
+
+.pinit .pinit-overlay a:active {
+	background-position: 0 -42px;
+}
