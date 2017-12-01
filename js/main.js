@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  Email();
+
   $('body').removeClass('no-js');
 
   $('a.blog-button').click(function() {
