@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import { getImage } from 'astro:assets';
+import bgSrc from '../assets/background-16x9.jpg';
+
+const { title = "Tolbxela", description = "Tolbxela's Place" } = Astro.props;
+
+// Center-cropped 16:9 hero, ~2400px wide. sharp will downscale + reencode.
+const bg = await getImage({ src: bgSrc, width: 1920, format: 'webp', quality: 78 });
+const bgRetina = await getImage({ src: bgSrc, width: 2560, format: 'webp', quality: 75 });
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Tolbxela" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#0b0d10" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={bg.src} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="image" href={bg.src} />
+    <style is:inline set:html={`
+      body { background-image: url(${bg.src}); }
+      @media (min-resolution: 1.5dppx), (min-width: 1800px) {
+        body { background-image: url(${bgRetina.src}); }
+      }
+    `}></style>
+  </head>
+  <body>
+    <main>
+      <Nav />
+      <slot />
+      <footer>&copy; {new Date().getFullYear()} Tolbxela</footer>
+    </main>
+  </body>
+</html>
