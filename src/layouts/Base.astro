@@ -48,6 +48,39 @@ const bg2x = '/bg/bg-2560.webp';
         a.setAttribute('href', 'mailto:' + addr);
         if (a.dataset.reveal !== 'false') a.textContent = addr;
       });
+
+      var PROJECT_HOSTS = { 'github.com': 1, 'dev.to': 1 };
+      var SOCIAL_HOSTS = {
+        'github.com': 'github', 'twitter.com': 'twitter', 'x.com': 'twitter',
+        'flickr.com': 'flickr', 'www.flickr.com': 'flickr',
+        'last.fm': 'lastfm', 'www.last.fm': 'lastfm',
+        'youtube.com': 'youtube', 'www.youtube.com': 'youtube',
+      };
+      function track(name, props) {
+        if (window.umami && typeof window.umami.track === 'function') {
+          props ? window.umami.track(name, props) : window.umami.track(name);
+        }
+      }
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (a.classList.contains('mail')) { track('email-click'); return; }
+        if (href.indexOf('http') !== 0) return;
+        var host;
+        try { host = new URL(href).hostname; } catch (_) { return; }
+        if (host === location.hostname) return;
+        var path = location.pathname.replace(/\/$/, '') || '/';
+        if (path === '/projects' && PROJECT_HOSTS[host]) {
+          track('project-click', { host: host, href: href });
+          return;
+        }
+        if (path === '/about' && SOCIAL_HOSTS[host]) {
+          track('social-click', { network: SOCIAL_HOSTS[host] });
+          return;
+        }
+        track('outbound-click', { host: host });
+      });
     </script>
   </body>
 </html>
