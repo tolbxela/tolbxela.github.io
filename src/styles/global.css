@@ -107,6 +107,58 @@ nav.top a:hover, nav.top a[aria-current="page"] { color: var(--fg); }
 
 footer { margin-top: 4rem; color: var(--muted); font-size: 0.8rem; }
 
+.contact { margin-top: 2.5rem; }
+.contact-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.contact-form label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.contact-form input,
+.contact-form textarea {
+  font: inherit;
+  color: var(--fg);
+  background: rgba(15, 18, 22, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  width: 100%;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.32);
+}
+.contact-form textarea { resize: vertical; min-height: 6rem; }
+.contact-form .botcheck {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  width: 0;
+}
+.form-row { display: flex; align-items: center; gap: 1rem; }
+.form-btn {
+  font: inherit;
+  color: var(--bg, #0b0d10);
+  background: var(--fg);
+  border: 1px solid var(--fg);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.form-btn:hover { opacity: 0.9; }
+.form-btn:disabled { opacity: 0.6; cursor: progress; }
+.form-status { font-size: 0.85rem; color: var(--muted); }
+.form-status.ok  { color: #8be39b; }
+.form-status.err { color: #ff8a8a; }
+
 @media (max-width: 480px) {
   nav.top { flex-direction: column; gap: 1rem; align-items: flex-start; padding-bottom: 2rem; }
   main { padding-top: 2rem; }

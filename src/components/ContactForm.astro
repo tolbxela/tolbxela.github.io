@@ -1,0 +1,83 @@
+---
+const {
+  accessKey = 'fac7cf83-0f8f-4c5d-accf-df35c21adc28',
+  subject = 'New contact from tolbxela.com',
+  fromName = 'tolbxela.com',
+  redirect,
+  heading,
+  prompt,
+} = Astro.props;
+const id = 'cf-' + Math.random().toString(36).slice(2, 9);
+---
+<section class="contact" id="contact">
+  {heading && <h2>{heading}</h2>}
+  {prompt && <p class="muted">{prompt}</p>}
+
+  <form id={id} class="contact-form" novalidate>
+    <input type="hidden" name="access_key" value={accessKey} />
+    <input type="hidden" name="subject" value={subject} />
+    <input type="hidden" name="from_name" value={fromName} />
+    {redirect && <input type="hidden" name="redirect" value={redirect} />}
+    <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" class="botcheck" />
+
+    <label>
+      <span>Name</span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" required autocomplete="email" />
+    </label>
+    <label>
+      <span>Message</span>
+      <textarea name="message" required rows="5"></textarea>
+    </label>
+
+    <div class="form-row">
+      <button type="submit" class="form-btn">Send</button>
+      <span class="form-status" data-status></span>
+    </div>
+  </form>
+</section>
+
+<script is:inline define:vars={{ id }}>
+  (function () {
+    var form = document.getElementById(id);
+    if (!form) return;
+    var btn = form.querySelector('button[type="submit"]');
+    var status = form.querySelector('[data-status]');
+    var bot = form.querySelector('.botcheck');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (bot && bot.value) return;
+      var label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.textContent = '';
+      status.className = 'form-status';
+      try {
+        var fd = new FormData(form);
+        var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+        var data = await res.json().catch(function () { return {}; });
+        if (res.ok && data.success !== false) {
+          status.textContent = 'Thanks - message sent.';
+          status.classList.add('ok');
+          form.reset();
+          if (window.umami && typeof window.umami.track === 'function') {
+            window.umami.track('contact-submit');
+          }
+        } else {
+          status.textContent = 'Could not send: ' + (data.message || res.statusText);
+          status.classList.add('err');
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please try again.';
+        status.classList.add('err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  })();
+</script>
