@@ -1,10 +1,18 @@
-tolbxela.github.io
-==================
+# tolbxela.github.io
 
-Tolbxela's Social Tools Site. 
+Personal site at [tolbxela.com](https://tolbxela.com). Astro + Vite, minimal.
 
-A small and handy tool to quickly and easily pin photos from 500px to Pinterest. 
+## Develop
 
-v.1.0.33 - 3 July 2013
+```sh
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # → dist/
+npm run preview
+```
 
-- Added other categories from 500px to pin: Editot's Choice, Popular, Upcoming and Fresh photos
+## Deploy
+
+Pushes to `master` are built and published to GitHub Pages by `.github/workflows/deploy.yml`.
+
+In the repo settings, set **Pages → Build and deployment → Source = GitHub Actions** and enable **Enforce HTTPS**. The `CNAME` (`tolbxela.com`) lives in `public/` and is copied into `dist/` on every build.

@@ -2,6 +2,15 @@
 ## Eclipse
 #################
 
+# Astro / node
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+*.code-workspace
+_keep/
+
 *.pydevproject
 .project
 .metadata
