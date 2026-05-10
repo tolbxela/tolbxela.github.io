@@ -102,7 +102,7 @@ nav.top a:hover, nav.top a[aria-current="page"] { color: var(--fg); }
   color: var(--tag-fg);
   letter-spacing: 0.02em;
 }
-.card-links { margin-top: 0.6rem; display: flex; gap: 1rem; font-size: 0.9rem; }
+.card-links { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.9rem; }
 .card-links a { color: var(--fg); }
 
 footer { margin-top: 4rem; color: var(--muted); font-size: 0.8rem; }

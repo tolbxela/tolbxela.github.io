@@ -49,9 +49,13 @@ const bg2x = '/bg/bg-2560.webp';
         if (a.dataset.reveal !== 'false') a.textContent = addr;
       });
 
-      var PROJECT_HOSTS = { 'github.com': 1, 'dev.to': 1 };
+      var PROJECT_HOSTS = {
+        'github.com': 1, 'dev.to': 1, 'medium.com': 1,
+        'marketplace.visualstudio.com': 1, 'open-vsx.org': 1
+      };
       var SOCIAL_HOSTS = {
         'github.com': 'github', 'twitter.com': 'twitter', 'x.com': 'twitter',
+        'medium.com': 'medium', 'dev.to': 'devto',
         'flickr.com': 'flickr', 'www.flickr.com': 'flickr',
         'last.fm': 'lastfm', 'www.last.fm': 'lastfm',
         'youtube.com': 'youtube', 'www.youtube.com': 'youtube',
