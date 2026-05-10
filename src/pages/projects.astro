@@ -6,8 +6,9 @@ const projects = [
     name: 'TaskDev',
     year: '2026',
     tags: ['VS Code', 'Extension', 'MCP', 'AI agents'],
-    desc: 'A task runner for AI coding agents. Exposes long-running dev tasks (servers, watchers, builds) to Claude Code and other MCP clients so the agent can start, stop, restart, and read logs without taking over the terminal.',
+    descHtml: 'A task runner for AI coding agents. Exposes long-running dev tasks (servers, watchers, builds) to Claude Code and other MCP clients so the agent can start, stop, restart, and read logs without taking over the terminal. Site: <a href="https://taskdev.dev">taskdev.dev</a>.',
     links: [
+      { href: 'https://taskdev.dev', label: 'taskdev.dev' },
       { href: 'https://open-vsx.org/extension/tolbxela/taskdev', label: 'Open VSX' },
       { href: 'https://marketplace.visualstudio.com/items?itemName=Tolbxela.taskdev', label: 'VS Code' },
       { href: 'https://github.com/tolbxela/taskdev', label: 'GitHub' },
@@ -30,7 +31,7 @@ const projects = [
             <h3>{p.name}</h3>
             <span class="card-meta">{p.year}</span>
           </div>
-          <p class="card-desc">{p.desc}</p>
+          <p class="card-desc" set:html={p.descHtml}></p>
           <ul class="tags">{p.tags.map(t => <li class="tag">{t}</li>)}</ul>
           <div class="card-links">
             {p.links.map(l => <a href={l.href}>{l.label} →</a>)}
