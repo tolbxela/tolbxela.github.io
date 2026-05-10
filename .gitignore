@@ -11,6 +11,9 @@ dist/
 *.code-workspace
 _keep/
 
+# never published — kept for posterity only
+archive/
+
 *.pydevproject
 .project
 .metadata

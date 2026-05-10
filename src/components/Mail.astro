@@ -1,0 +1,10 @@
+---
+const { user, host = 'tolbxela.com', label = 'email' } = Astro.props;
+---
+<a
+  class="mail"
+  href="#"
+  data-u={user}
+  data-h={host}
+  rel="noopener"
+>{label}</a>

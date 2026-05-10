@@ -1,14 +1,11 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
-import { getImage } from 'astro:assets';
-import bgSrc from '../assets/background-16x9.jpg';
 
 const { title = "Tolbxela", description = "Tolbxela's Place" } = Astro.props;
 
-// Center-cropped 16:9 hero, ~2400px wide. sharp will downscale + reencode.
-const bg = await getImage({ src: bgSrc, width: 1920, format: 'webp', quality: 78 });
-const bgRetina = await getImage({ src: bgSrc, width: 2560, format: 'webp', quality: 75 });
+const bg1x = '/bg/bg-1920.webp';
+const bg2x = '/bg/bg-2560.webp';
 ---
 <!doctype html>
 <html lang="en">
@@ -19,17 +16,20 @@ const bgRetina = await getImage({ src: bgSrc, width: 2560, format: 'webp', quali
     <meta name="description" content={description} />
     <meta name="author" content="Tolbxela" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#0b0d10" />
+    <meta name="google-site-verification" content="GA5zLJpMfcnhklnsF-1uTnYc2gadjxWCQo55aAgAxwU" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={bg.src} />
+    <meta property="og:image" content={bg1x} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preload" as="image" href={bg.src} />
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="dc390dd6-a327-454f-91c7-cede5968fd91"></script>
+    <link rel="preload" as="image" href={bg1x} />
     <style is:inline set:html={`
-      body { background-image: url(${bg.src}); }
+      body { background-image: url(${bg1x}); }
       @media (min-resolution: 1.5dppx), (min-width: 1800px) {
-        body { background-image: url(${bgRetina.src}); }
+        body { background-image: url(${bg2x}); }
       }
     `}></style>
   </head>
@@ -37,7 +37,17 @@ const bgRetina = await getImage({ src: bgSrc, width: 2560, format: 'webp', quali
     <main>
       <Nav />
       <slot />
-      <footer>&copy; {new Date().getFullYear()} Tolbxela</footer>
+      <footer>&copy; {new Date().getFullYear()} Tolbxela &middot; <a href="/privacy">Privacy</a></footer>
     </main>
+    <script is:inline>
+      document.querySelectorAll('a.mail').forEach(function (a) {
+        var u = a.getAttribute('data-u');
+        var h = a.getAttribute('data-h');
+        if (!u || !h) return;
+        var addr = u + '@' + h;
+        a.setAttribute('href', 'mailto:' + addr);
+        if (a.dataset.reveal !== 'false') a.textContent = addr;
+      });
+    </script>
   </body>
 </html>

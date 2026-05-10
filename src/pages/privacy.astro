@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Mail from '../components/Mail.astro';
+---
+<Base title="Privacy · Tolbxela" description="Privacy policy for tolbxela.com">
+  <h1>Privacy</h1>
+  <p class="muted">What this site collects, in plain terms.</p>
+
+  <h2>Analytics</h2>
+  <p>
+    This site uses <a href="https://umami.is/">Umami</a> for anonymous, aggregated visit
+    statistics. Umami does not use cookies, does not collect personal data, and does not
+    store full IP addresses. Data is hosted by Umami Cloud.
+  </p>
+
+  <h2>Cookies</h2>
+  <p>This site does not set any cookies.</p>
+
+  <h2>Hosting</h2>
+  <p>
+    The site is hosted on GitHub Pages. GitHub may log requests (IP, user agent, referrer)
+    for security and abuse prevention as described in the
+    <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>For privacy questions, email <Mail user="admin" />.</p>
+</Base>

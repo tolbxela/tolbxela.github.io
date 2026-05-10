@@ -1,14 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import Mail from '../components/Mail.astro';
 
 const socials = [
   { label: 'GitHub',  href: 'https://github.com/tolbxela' },
   { label: 'Twitter', href: 'https://twitter.com/tolbxela' },
-  { label: 'Blogger', href: 'https://www.blogger.com/profile/04570236348053573400' },
   { label: 'Flickr',  href: 'https://www.flickr.com/people/tolbxela/' },
   { label: 'Last.fm', href: 'https://last.fm/user/tolbxela' },
   { label: 'YouTube', href: 'https://www.youtube.com/channel/UCWKFQN85ISBanztuspXR-PA' },
-  { label: 'Email',   href: 'mailto:tolbxela@gmail.com' },
 ];
 ---
 <Base title="About · Tolbxela">
@@ -24,5 +23,6 @@ const socials = [
   <h2>Elsewhere</h2>
   <ul class="socials">
     {socials.map(s => <li><a href={s.href} rel="me noopener">{s.label}</a></li>)}
+    <li><Mail user="email" label="Email" /></li>
   </ul>
 </Base>
