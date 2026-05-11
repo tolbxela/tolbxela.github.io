@@ -105,7 +105,7 @@ nav.top a:hover, nav.top a[aria-current="page"] { color: var(--fg); }
 .card-links { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.9rem; }
 .card-links a { color: var(--fg); }
 
-footer { margin-top: 4rem; color: var(--muted); font-size: 0.8rem; }
+footer { margin-top: 4rem; color: var(--muted); font-size: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
 
 .contact { margin-top: 2.5rem; }
 .contact-form {

@@ -37,7 +37,10 @@ const bg2x = '/bg/bg-2560.webp';
     <main>
       <Nav />
       <slot />
-      <footer>&copy; {new Date().getFullYear()} Tolbxela &middot; <a href="/privacy">Privacy</a></footer>
+      <footer>
+        <span>&copy; {new Date().getFullYear()} Tolbxela &middot; <a href="/privacy">Privacy</a></span>
+        <span>Built with &hearts; using <a href="https://astro.build" rel="noopener">Astro</a></span>
+      </footer>
     </main>
     <script is:inline>
       document.querySelectorAll('a.mail').forEach(function (a) {
