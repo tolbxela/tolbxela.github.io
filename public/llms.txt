@@ -1,0 +1,29 @@
+# tolbxela.com
+
+Personal website for Tolbxela.
+
+## Website
+
+- [tolbxela.com](https://tolbxela.com)
+
+## Pages
+
+- [Home](https://tolbxela.com/)
+- [About](https://tolbxela.com/about/)
+- [Projects](https://tolbxela.com/projects/)
+- [Contact](https://tolbxela.com/contact/)
+- [Privacy](https://tolbxela.com/privacy/)
+
+## Projects
+
+- [taskdev.dev](https://taskdev.dev)
+- [vsx-pulse.org](https://vsx-pulse.org) — Live stats for the Eclipse Open VSX marketplace, including extension counts, download trends, ratings, version history, and registry telemetry.
+
+## Contact
+ 
+For professional inquiries, use the contact page:
+- [Contact](https://tolbxela.com/contact/)
+
+## Sitemap
+
+- [Sitemap](https://tolbxela.com/sitemap-index.xml)

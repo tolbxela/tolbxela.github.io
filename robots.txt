@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://tolbxela.com/sitemap.xml
