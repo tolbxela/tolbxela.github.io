@@ -1,0 +1,26 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+const {
+  title = 'Tolbxela',
+  description = "Tolbxela's Place",
+  ogImage = '/bg/bg-1920.webp',
+} = Astro.props;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content="Tolbxela" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="theme-color" content="#0b0d10" />
+<meta name="google-site-verification" content="GA5zLJpMfcnhklnsF-1uTnYc2gadjxWCQo55aAgAxwU" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />

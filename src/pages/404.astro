@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+
+const routes = [
+  { href: '/',         label: 'home',     hint: 'overview' },
+  { href: '/projects', label: 'projects', hint: 'things I have built' },
+  { href: '/about',    label: 'about',    hint: 'short bio &middot; elsewhere' },
+  { href: '/contact',  label: 'contact',  hint: 'get in touch' },
+];
+---
+<Base
+  title="404 · Tolbxela"
+  description="Page not found."
+>
+  <section class="hero notfound">
+    <p class="status">404</p>
+    <h1>Not here.</h1>
+    <p class="lead">
+      <code>{Astro.url.pathname}</code> doesn&rsquo;t resolve to a page on this site.
+    </p>
+    <p class="muted">
+      It may have moved, been renamed, or never existed. Try one of the routes
+      below, or head <a href="/">home</a>.
+    </p>
+  </section>
+
+  <h2>Where to go</h2>
+  <ul class="card-list">
+    {routes.map(route => (
+      <li>
+        <a class="card" href={route.href}>
+          <div class="card-head">
+            <h3>{route.label}</h3>
+            <span class="card-meta">{route.href}</span>
+          </div>
+          <p class="card-desc" set:html={route.hint}></p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  .notfound .status {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+  }
+  .notfound h1 { margin-bottom: 0.5rem; }
+  .notfound .lead code {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+    font-size: 0.92em;
+  }
+</style>

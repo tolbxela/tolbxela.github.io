@@ -1,8 +1,15 @@
 ---
 import '../styles/global.css';
+import Head from '../components/Head.astro';
 import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 
-const { title = "Tolbxela", description = "Tolbxela's Place" } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
 
 const bg1x = '/bg/bg-1920.webp';
 const bg2x = '/bg/bg-2560.webp';
@@ -10,26 +17,7 @@ const bg2x = '/bg/bg-2560.webp';
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="author" content="Tolbxela" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#0b0d10" />
-    <meta name="google-site-verification" content="GA5zLJpMfcnhklnsF-1uTnYc2gadjxWCQo55aAgAxwU" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={bg1x} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <script is:inline>
-      window.__tolbxelaAnalytics = {
-        src: 'https://cloud.umami.is/script.js',
-        websiteId: 'dc390dd6-a327-454f-91c7-cede5968fd91'
-      };
-    </script>
+    <Head title={title} description={description} ogImage={bg1x} />
     <link rel="preload" as="image" href={bg1x} />
     <style is:inline set:html={`
       body { background-image: url(${bg1x}); }
@@ -42,216 +30,8 @@ const bg2x = '/bg/bg-2560.webp';
     <main>
       <Nav />
       <slot />
-      <footer>
-        <span>&copy; {new Date().getFullYear()} Tolbxela &middot; <a href="/privacy">Privacy</a> &middot; <a href="#" data-consent-reopen>Cookie settings</a></span>
-        <span>Built with &hearts; using <a href="https://astro.build" rel="noopener">Astro</a></span>
-      </footer>
+      <Footer />
     </main>
-    <div class="consent" data-consent hidden role="dialog" aria-modal="false" aria-labelledby="consent-title" aria-describedby="consent-body">
-      <div class="consent-card">
-        <div class="consent-head">
-          <span class="consent-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-4-4 4 4 0 0 1-4-4 2 2 0 0 0-2-2Z" />
-              <circle cx="9" cy="11" r=".6" fill="currentColor" stroke="none" />
-              <circle cx="13.5" cy="15" r=".6" fill="currentColor" stroke="none" />
-              <circle cx="15" cy="9" r=".6" fill="currentColor" stroke="none" />
-            </svg>
-          </span>
-          <div class="consent-headtext">
-            <div class="consent-titlerow">
-              <h2 id="consent-title">Analytics</h2>
-              <span class="consent-badge" data-consent-badge hidden>Saved</span>
-            </div>
-            <p id="consent-body">
-              This site is cookieless. With your consent it loads privacy-friendly <a href="/privacy">Umami</a> analytics
-              - anonymous, aggregated visit counts only, no tracking across sites.
-            </p>
-          </div>
-        </div>
-        <button type="button" class="consent-toggle" role="switch" aria-checked="false" data-consent-toggle>
-          <span class="consent-toggle-text">
-            <span class="consent-toggle-title">Privacy-friendly analytics</span>
-            <span class="consent-toggle-state" data-consent-state>Off</span>
-          </span>
-          <span class="consent-track" aria-hidden="true"><span class="consent-knob"></span></span>
-        </button>
-        <div class="consent-actions">
-          <button type="button" class="consent-btn" data-consent-decline>Decline all</button>
-          <button type="button" class="consent-btn consent-btn--accept" data-consent-save>Accept</button>
-        </div>
-      </div>
-    </div>
-    <script is:inline>
-      var CONSENT_KEY = 'tolbxela-analytics-consent';
-
-      function readConsent() {
-        try {
-          var v = localStorage.getItem(CONSENT_KEY);
-          return v === 'granted' || v === 'denied' ? v : null;
-        } catch (_) {
-          return null;
-        }
-      }
-
-      function writeConsent(value) {
-        try {
-          localStorage.setItem(CONSENT_KEY, value);
-        } catch (_) {}
-      }
-
-      function loadAnalytics() {
-        var cfg = window.__tolbxelaAnalytics;
-        if (!cfg || !cfg.src || !cfg.websiteId || document.querySelector('script[data-tolbxela-analytics]')) return;
-        var s = document.createElement('script');
-        s.async = true;
-        s.defer = true;
-        s.src = cfg.src;
-        s.setAttribute('data-website-id', cfg.websiteId);
-        s.setAttribute('data-tolbxela-analytics', '');
-        document.head.appendChild(s);
-      }
-
-      function flashSaved(badge) {
-        if (!badge) return;
-        badge.hidden = false;
-        badge.classList.remove('is-flash');
-        void badge.offsetWidth;
-        badge.classList.add('is-flash');
-      }
-
-      function openConsent(banner) {
-        if (!banner) return;
-        if (banner.__seed) banner.__seed();
-        banner.hidden = false;
-        void banner.offsetWidth;
-        banner.classList.add('is-open');
-      }
-
-      function closeConsent(banner) {
-        if (!banner) return;
-        banner.classList.remove('is-open');
-        var done = function () {
-          banner.hidden = true;
-          banner.removeEventListener('transitionend', done);
-        };
-        banner.addEventListener('transitionend', done);
-      }
-
-      function initConsent() {
-        var banner = document.querySelector('[data-consent]');
-        var reopen = document.querySelector('[data-consent-reopen]');
-        if (readConsent() === 'granted') loadAnalytics();
-        if (reopen) {
-          reopen.addEventListener('click', function (e) {
-            e.preventDefault();
-            openConsent(banner);
-          });
-        }
-        if (!banner) return;
-
-        var toggle = banner.querySelector('[data-consent-toggle]');
-        var stateLabel = banner.querySelector('[data-consent-state]');
-        var badge = banner.querySelector('[data-consent-badge]');
-        var pending = readConsent() === 'granted';
-
-        var syncToggle = function () {
-          if (toggle) toggle.setAttribute('aria-checked', pending ? 'true' : 'false');
-          banner.classList.toggle('is-on', pending);
-          if (stateLabel) stateLabel.textContent = pending ? 'On' : 'Off';
-        };
-
-        banner.__seed = function () {
-          var saved = readConsent();
-          pending = saved === 'granted';
-          syncToggle();
-          if (badge) badge.hidden = saved === null;
-        };
-        banner.__seed();
-
-        if (toggle) {
-          toggle.addEventListener('click', function () {
-            pending = !pending;
-            syncToggle();
-            if (badge) badge.hidden = true;
-          });
-        }
-
-        var commit = function (enabled) {
-          writeConsent(enabled ? 'granted' : 'denied');
-          if (enabled) loadAnalytics();
-          flashSaved(badge);
-          setTimeout(function () { closeConsent(banner); }, 650);
-        };
-
-        var save = banner.querySelector('[data-consent-save]');
-        var decline = banner.querySelector('[data-consent-decline]');
-        if (save) {
-          save.addEventListener('click', function () {
-            pending = true;
-            syncToggle();
-            commit(true);
-          });
-        }
-        if (decline) {
-          decline.addEventListener('click', function () {
-            pending = false;
-            syncToggle();
-            commit(false);
-          });
-        }
-
-        if (readConsent() === null && window.__tolbxelaAnalytics) openConsent(banner);
-      }
-
-      initConsent();
-
-      document.querySelectorAll('a.mail').forEach(function (a) {
-        var u = a.getAttribute('data-u');
-        var h = a.getAttribute('data-h');
-        if (!u || !h) return;
-        var addr = u + '@' + h;
-        a.setAttribute('href', 'mailto:' + addr);
-        if (a.dataset.reveal !== 'false') a.textContent = addr;
-      });
-
-      var PROJECT_HOSTS = {
-        'github.com': 1, 'dev.to': 1, 'medium.com': 1,
-        'marketplace.visualstudio.com': 1, 'open-vsx.org': 1,
-        'vsx-pulse.org': 1
-      };
-      var SOCIAL_HOSTS = {
-        'github.com': 'github', 'twitter.com': 'twitter', 'x.com': 'twitter',
-        'medium.com': 'medium', 'dev.to': 'devto',
-        'flickr.com': 'flickr', 'www.flickr.com': 'flickr',
-        'last.fm': 'lastfm', 'www.last.fm': 'lastfm',
-        'youtube.com': 'youtube', 'www.youtube.com': 'youtube',
-      };
-      function track(name, props) {
-        if (window.umami && typeof window.umami.track === 'function') {
-          props ? window.umami.track(name, props) : window.umami.track(name);
-        }
-      }
-      document.addEventListener('click', function (e) {
-        var a = e.target.closest && e.target.closest('a');
-        if (!a) return;
-        var href = a.getAttribute('href') || '';
-        if (a.classList.contains('mail')) { track('email-click'); return; }
-        if (href.indexOf('http') !== 0) return;
-        var host;
-        try { host = new URL(href).hostname; } catch (_) { return; }
-        if (host === location.hostname) return;
-        var path = location.pathname.replace(/\/$/, '') || '/';
-        if (path === '/projects' && PROJECT_HOSTS[host]) {
-          track('project-click', { host: host, href: href });
-          return;
-        }
-        if (path === '/about' && SOCIAL_HOSTS[host]) {
-          track('social-click', { network: SOCIAL_HOSTS[host] });
-          return;
-        }
-        track('outbound-click', { host: host });
-      });
-    </script>
+    <Analytics />
   </body>
 </html>
