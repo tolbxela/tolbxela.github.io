@@ -8,19 +8,23 @@ import Mail from '../components/Mail.astro';
 
   <h2>Analytics</h2>
   <p>
-    This site uses <a href="https://umami.is/">Umami</a> for anonymous, aggregated visit
-    statistics. Umami does not use cookies, does not collect personal data, and does not
-    store full IP addresses. Data is hosted by Umami Cloud.
+    With your consent, this site loads <a href="https://umami.is/">Umami</a> for anonymous,
+    aggregated visit statistics. Umami does not use cookies, does not collect personal data,
+    and does not store full IP addresses. Data is hosted by Umami Cloud.
+  </p>
+  <p>
+    The consent choice itself is cookieless: it is stored in your browser's <code>localStorage</code>
+    under <code>tolbxela-analytics-consent</code>. If you decline, the Umami script is not loaded
+    and no analytics request is sent.
   </p>
 
   <h2>Cookies</h2>
   <p>This site does not set any cookies.</p>
 
-  <h2>Hosting</h2>
+  <h2>Contact form</h2>
   <p>
-    The site is hosted on GitHub Pages. GitHub may log requests (IP, user agent, referrer)
-    for security and abuse prevention as described in the
-    <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>.
+    If you use the contact form, the details you submit are sent to Web3Forms so the message can
+    be delivered by email. Do not include sensitive information in the form.
   </p>
 
   <h2>Contact</h2>

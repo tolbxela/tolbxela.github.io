@@ -17,7 +17,7 @@ Personal website for Tolbxela.
 ## Projects
 
 - [taskdev.dev](https://taskdev.dev)
-- [vsx-pulse.org](https://vsx-pulse.org) — Live stats for the Eclipse Open VSX marketplace, including extension counts, download trends, ratings, version history, and registry telemetry.
+- [vsx-pulse.org](https://vsx-pulse.org) — Live stats for the Eclipse Open VSX marketplace, including extension counts, download trends, ratings, and version history.
 
 ## Contact
  
