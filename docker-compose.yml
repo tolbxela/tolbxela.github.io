@@ -1,0 +1,8 @@
+services:
+  tolbxela-com:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "80"
