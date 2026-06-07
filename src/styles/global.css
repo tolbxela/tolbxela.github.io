@@ -159,7 +159,146 @@ footer { margin-top: 4rem; color: var(--muted); font-size: 0.8rem; display: flex
 .form-status.ok  { color: #8be39b; }
 .form-status.err { color: #ff8a8a; }
 
+.consent {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem 1rem;
+  pointer-events: none;
+}
+.consent[hidden] { display: none; }
+.consent-card {
+  pointer-events: auto;
+  width: min(560px, 100%);
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: rgba(11, 13, 16, 0.86);
+  backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 24px 70px -28px rgba(0, 0, 0, 0.75);
+  transform: translateY(14px);
+  opacity: 0;
+  transition: transform 260ms ease, opacity 220ms ease;
+}
+.consent.is-open .consent-card { transform: translateY(0); opacity: 1; }
+.consent-head { display: flex; align-items: flex-start; gap: 0.75rem; }
+.consent-mark {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg);
+}
+.consent-headtext { flex: 1; min-width: 0; }
+.consent-titlerow { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+.consent-head h2 { margin: 0; color: var(--fg); }
+.consent-head p { margin: 0; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+.consent-badge {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 227, 155, 0.35);
+  background: rgba(139, 227, 155, 0.12);
+  color: #8be39b;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.consent-badge[hidden] { display: none; }
+.consent-badge.is-flash { animation: consent-saved 900ms ease; }
+@keyframes consent-saved {
+  0% { transform: scale(0.85); opacity: 0; }
+  25% { transform: scale(1.06); opacity: 1; }
+  60% { transform: scale(1); }
+}
+.consent-toggle {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: rgba(15, 18, 22, 0.55);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.consent-toggle:hover { border-color: rgba(255,255,255,0.28); }
+.consent-toggle-text { display: flex; flex-direction: column; gap: 0.05rem; }
+.consent-toggle-title { font-size: 0.85rem; }
+.consent-toggle-state {
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.consent.is-on .consent-toggle-state { color: #8be39b; }
+.consent-track {
+  flex: none;
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: rgba(154, 163, 173, 0.28);
+}
+.consent.is-on .consent-track { background: #8be39b; border-color: transparent; }
+.consent-knob {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(0, -50%);
+  transition: transform 180ms ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.consent.is-on .consent-knob { transform: translate(18px, -50%); }
+.consent-actions {
+  display: inline-flex;
+  align-self: flex-end;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: rgba(15, 18, 22, 0.55);
+}
+.consent-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.45rem 0.8rem;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.consent-btn:hover { color: var(--fg); background: rgba(255, 255, 255, 0.06); }
+.consent-btn--accept { color: var(--bg); background: var(--fg); }
+.consent-btn--accept:hover { color: var(--bg); background: var(--fg); opacity: 0.9; }
+
 @media (max-width: 480px) {
   nav.top { flex-direction: column; gap: 1rem; align-items: flex-start; padding-bottom: 2rem; }
   main { padding-top: 2rem; }
+  .consent-actions { align-self: stretch; }
+  .consent-btn { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent-card { transition: opacity 160ms ease; transform: none; }
+  .consent-knob { transition: none; }
+  .consent-badge.is-flash { animation: none; }
 }
